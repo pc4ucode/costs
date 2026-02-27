@@ -22,6 +22,28 @@
       "budget": "4444",
       "cost": 0,
       "services": []
+    },
+    {
+      "id": "7adf",
+      "name": "meu projeto 1",
+      "budget": "1299",
+      "category": {
+        "id": "3",
+        "name": "Design"
+      },
+      "cost": 0,
+      "services": []
+    },
+    {
+      "id": "087f",
+      "name": "meu projeto 1",
+      "budget": "3333",
+      "category": {
+        "id": "1",
+        "name": "Infra"
+      },
+      "cost": 0,
+      "services": []
     }
   ],
   "categories": [
