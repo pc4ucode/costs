@@ -2,9 +2,14 @@
   "projects": [
     {
       "id": "d52b",
-      "name": "teste",
+      "name": "projeto atualizado",
       "cost": 0,
-      "services": []
+      "services": [],
+      "budget": "1200",
+      "category": {
+        "id": "3",
+        "name": "Design"
+      }
     },
     {
       "id": "7adf",
