@@ -14,13 +14,20 @@
     {
       "id": "7adf",
       "name": "meu projeto 1",
-      "budget": "1290",
+      "budget": "7000",
       "category": {
         "id": "3",
         "name": "Design"
       },
-      "cost": 0,
-      "services": []
+      "cost": 100,
+      "services": [
+        {
+          "name": "se1",
+          "cost": "100",
+          "description": "teste",
+          "id": "b687cfd9-54df-44c7-8564-05082a9167f2"
+        }
+      ]
     }
   ],
   "categories": [

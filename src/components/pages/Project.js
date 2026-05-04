@@ -5,6 +5,8 @@ import Loading from "../layout/Loading";
 import Container from "../layout/Container";
 import ProjectForm from "../project/ProjectForm";
 import Message from "../layout/Message";
+import ServiceForm from "../service/ServiceForm";
+import { parse, v4 as uuidv4 } from "uuid";
 
 function Project() {
   const { id } = useParams();
@@ -53,6 +55,39 @@ function Project() {
         setType("success");
       })
       .catch((error) => console.error("Error updating project:", error));
+  }
+
+  function createService(project) {
+    setMessage("");
+
+    const lastService = project.services[project.services.length - 1];
+    lastService.id = uuidv4();
+
+    const lastServiceCost = lastService.cost;
+    const newCost = parseFloat(project.cost) + parseFloat(lastServiceCost);
+
+    if (newCost > parseFloat(project.budget)) {
+      setMessage("Orçamento ultrapassado, verifique o valor do serviço!");
+      setType("error");
+      project.services.pop();
+      return false;
+    }
+
+    project.cost = newCost;
+
+    fetch(`http://localhost:5000/projects/${project.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(project),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // setShowServiceForm(false);
+        console.log(data);
+      })
+      .catch((error) => console.error(error));
   }
 
   function toggleProjectForm() {
@@ -106,7 +141,13 @@ function Project() {
               </button>
 
               <div className={styles.project_info}>
-                {showServiceForm && <div>Formulário do serviço</div>}
+                {showServiceForm && (
+                  <ServiceForm
+                    handleSubmit={createService}
+                    textBtn="Adicionar Serviço"
+                    projectData={project}
+                  />
+                )}
               </div>
             </div>
             <h2>Serviços</h2>
