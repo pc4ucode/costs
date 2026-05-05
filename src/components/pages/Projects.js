@@ -6,6 +6,7 @@ import LinkButton from "../layout/LinkButton";
 import ProjectCard from "../project/ProjectCard";
 import { useState, useEffect } from "react";
 import Loading from "../layout/Loading";
+import { buildApiUrl } from "../../services/api";
 
 function Projects() {
   const location = useLocation();
@@ -19,7 +20,7 @@ function Projects() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:5000/projects", {
+    fetch(buildApiUrl("/projects"), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +36,7 @@ function Projects() {
   }, []);
 
   function removeProject(id) {
-    fetch(`http://localhost:5000/projects/${id}`, {
+    fetch(buildApiUrl(`/projects/${id}`), {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

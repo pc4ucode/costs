@@ -2,6 +2,7 @@ import { useInsertionEffect, useState } from "react";
 import Input from "../form/Input";
 import Select from "../form/Select";
 import SubmitButton from "../form/SubmitButton";
+import { buildApiUrl } from "../../services/api";
 import styles from "./ProjectForm.module.css";
 
 function ProjectForm({ handleSubmit, btnText, projectData }) {
@@ -9,7 +10,7 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
   const [project, setProject] = useState(projectData || {});
 
   useInsertionEffect(() => {
-    fetch("http://localhost:5000/categories", {
+    fetch(buildApiUrl("/categories"), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -6,8 +6,9 @@ import Container from "../layout/Container";
 import ProjectForm from "../project/ProjectForm";
 import Message from "../layout/Message";
 import ServiceForm from "../service/ServiceForm";
-import { parse, v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import ServiceCard from "../service/ServiceCard";
+import { buildApiUrl } from "../../services/api";
 
 function Project() {
   const { id } = useParams();
@@ -20,7 +21,7 @@ function Project() {
 
   useEffect(() => {
     setTimeout(() => {
-      fetch(`http://localhost:5000/projects/${id}`, {
+      fetch(buildApiUrl(`/projects/${id}`), {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +46,7 @@ function Project() {
       return false;
     }
 
-    fetch(`http://localhost:5000/projects/${project.id}`, {
+    fetch(buildApiUrl(`/projects/${project.id}`), {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +81,7 @@ function Project() {
 
     project.cost = newCost;
 
-    fetch(`http://localhost:5000/projects/${project.id}`, {
+    fetch(buildApiUrl(`/projects/${project.id}`), {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -103,7 +104,7 @@ function Project() {
     projectUpdated.services = servicesUpdated;
     projectUpdated.cost = parseFloat(projectUpdated.cost) - parseFloat(cost);
 
-    fetch(`http://localhost:5000/projects/${projectUpdated.id}`, {
+    fetch(buildApiUrl(`/projects/${projectUpdated.id}`), {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
